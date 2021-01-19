@@ -1,0 +1,4 @@
+client/node_modules
+client/public/favicon_package_v0.16
+client/.eslintcache
+.DS_Store
