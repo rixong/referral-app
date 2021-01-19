@@ -1,23 +1,23 @@
 import React from 'react';
 import {Container, Row, Col} from 'react-bootstrap';
 import {CircularProgressbarWithChildren, buildStyles} from 'react-circular-progressbar';
-import 'react-circular-progressbar/dist/style.css';
-import { MdCheck, MdRadioButtonUnchecked} from 'react-icons/md';
-import { ACHIEVED_COLOR, OPEN_COLOR, aspectRatio, colStyle, topRightCorner} from 'styles';
+import 'react-circular-progressbar/dist/styles.css'; // Styles for progress bar
+import { MdCheck} from 'react-icons/md';
+import { ACHIEVED_COLOR, OPEN_COLOR, aspectRatio, colStyle, topRightCorner} from './styles';
 
 const milestoneList = [
   {
-      imageLocation: "assets/1_kitten.jpg",
+      imageLocation: "1_kitten.jpg",
       lowerThreshold: 0,
       upperThreshold: 5
   },
   {
-      imageLocation: "assets/2_kitten.jpg",
+      imageLocation: "2_kitten.jpg",
       lowerThreshold: 5,
       upperThreshold: 10
   },
   {
-      imageLocation: "assets/3_kitten.jpg",
+      imageLocation: "3_kitten.jpg",
       lowerThreshold: 10,
       upperThreshold: 20
   }
@@ -32,7 +32,7 @@ const ProgressBarText = (upperThreshold, referrals, percent) => {
         {upperThreshold}
       </span>
     )
-  } else if (percent <= 100){
+  } else if (percent >= 100){
     return (
       <span style={{color, fontSize: "12px"}}>
         {upperThreshold} <MdCheck style={{color}} />
@@ -41,7 +41,7 @@ const ProgressBarText = (upperThreshold, referrals, percent) => {
   } else {
     return (
       <span style={{color, fontSize: "12px"}}>
-        {referrals/upperThreshold}
+        {`${referrals}/${upperThreshold}`}
       </span>
     )
   }
@@ -64,7 +64,10 @@ const Milestone = (url, lowerThreshold, upperThreshold, referrals) => {
               styles={buildStyles({
                 textColor: ACHIEVED_COLOR,
                 pathColor: ACHIEVED_COLOR,
-                textSize: "32px"
+                textSize: "32px",
+                rotation: 0,
+                strokeLinecap: 'round',
+                pathTransitionDuration: 1,
               })}
             >
               {text}
