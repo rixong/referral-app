@@ -2,7 +2,7 @@ import React from 'react';
 import {Container, Row, Col} from 'react-bootstrap';
 import {CircularProgressbarWithChildren, buildStyles} from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/style.css';
-import { MdCheck} from 'react-icons/md';
+import { MdCheck, MdRadioButtonUnchecked} from 'react-icons/md';
 import { ACHIEVED_COLOR, OPEN_COLOR, aspectRatio, colStyle, topRightCorner} from 'styles';
 
 const milestoneList = [
@@ -45,6 +45,37 @@ const ProgressBarText = (upperThreshold, referrals, percent) => {
       </span>
     )
   }
+}
+
+const Milestone = (url, lowerThreshold, upperThreshold, referrals) => {
+  const requiredReferrals = upperThreshold - lowerThreshold;
+  const achievedReferrals = referrals - lowerThreshold;
+  const percentage = (achievedReferrals / requiredReferrals) * 100;
+  const text = ProgressBarText(upperThreshold, referrals, percentage)
+
+  return (
+    <div style={{paddingTop: "25px"}}>
+      <div style={aspectRatio}>
+        <div className="z-depth-4" style={{ ...colStyle, backgroundImage: `url("${url}")` }}>
+          <div style={topRightCorner}>
+            <CircularProgressbarWithChildren
+              value={percentage}
+              strokeWidth={10}
+              styles={buildStyles({
+                textColor: ACHIEVED_COLOR,
+                pathColor: ACHIEVED_COLOR,
+                textSize: "32px"
+              })}
+            >
+              {text}
+            </CircularProgressbarWithChildren>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+
 }
 
 const Milestones = () => {
