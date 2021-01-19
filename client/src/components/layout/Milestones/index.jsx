@@ -78,11 +78,23 @@ const Milestone = (url, lowerThreshold, upperThreshold, referrals) => {
 
 }
 
-const Milestones = () => {
+const Milestones = props => {
+  const referrals = props.referrals || 0;
+
   return (
-    <div>
-      Milestones Component
-    </div>
+    <Container>
+      <div style={{padding: "25px"}}>
+        <Row>
+          { milestoneList.map((item) => {
+            return (
+              <Col xs={12} sm={6} md={4}>
+                {Milestone(item.imageLocation, item.lowerThreshold, item.upperThreshold, referrals)}
+              </Col>
+            )
+          })}
+        </Row>
+      </div>
+    </Container>
   )
 }
 
